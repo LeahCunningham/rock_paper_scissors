@@ -1,47 +1,114 @@
 
-// There are three choices - rock, paper, scissors
-// Randomly select one of the 3 choices for the computer player
-    // Generate a random number that results in 3 possible integer values
-    // Assign each of the 3 possible integers to each of the 3 choice options
-// Allow the user to select one of the choices for their choice
-// Compare the choice of the computer and the user to see who won
-// Store the score for the user and the computer
-    // Create variables for storing these values
 
 
+//Assigns 3x randomly generated numbers to the 3x choice options
+function getComputerChoice() {
+    let randomInt = Math.floor(Math.random() * 3); // returns a random number that results in a vaule of 0, 1 or 2
+    if (randomInt < 1) {
+        return "rock";
+    }
+    else if (randomInt < 2 && randomInt >= 1) {
+        return "paper";
+    }
+    else {
+        return "scissors";
+    }
+}
 
 
-let randomChoice = Math.floor(Math.random() * 3); // returns a random number that results in a vaule of 0, 1 or 2
+//Triggers the prompt and returns the text input as one of the three choices (or error message)
+let humanInput;
 
-function getComputerChoice () {
-        if (randomChoice < 1) {
-            return "rock";
-        } 
-        else if (randomChoice < 2 && randomChoice >= 1) {
-            return "paper";
+function getHumanChoice() {
+    humanInput = prompt("Choose your fighter - Rock, Paper or Scissors");
+    if (humanInput.toLowerCase() === "rock") {
+        return "rock";
+    }
+    else if (humanInput.toLowerCase() === "paper") {
+        return "paper";
+    }
+    else if (humanInput.toLowerCase() === "scissors") {
+        return "scissors";
+    }
+    else {
+        return "please only enter 'rock' 'paper' or 'scissors'";
+    }
+}
+
+// Variables to store the user and computer choice for the current round
+let humanSelection = getHumanChoice();
+let computerSelection = getComputerChoice();
+
+// run the same function 5 times and pass in the new humanChoice and computerChoice value each time, increment the count and the scores
+
+function playGame() {
+    let humanScore = 0;
+    let computerScore = 0;
+    let count = 0;
+    function playRound(humanChoice, computerChoice) {
+        count = ++count;
+        console.log("Round no.:" + count);
+        console.log("Your choice:" + humanChoice)
+        console.log("Computer's choice:" + computerChoice)
+
+        if (humanChoice === computerChoice) {
+            console.log("Result: It's a draw");
+            console.log("Computer score:" + computerScore);
+            console.log("Your score:" + humanScore);
+        }
+        else if ((humanChoice === "rock" && computerChoice === "paper") || (humanChoice === "paper" && computerChoice === "scissors") || (humanChoice === "scissors" && computerChoice === "rock")) {
+            computerScore = ++computerScore;
+            console.log("Result: You lose");
+            console.log("Computer score:" + computerScore);
+            console.log("Your score:" + humanScore);
+
+        }
+        else if ((humanChoice === "paper" && computerChoice === "rock") || (humanChoice === "scissors" && computerChoice === "paper") || (humanChoice === "rock" && computerChoice === "scissors")) {
+            humanScore = ++humanScore;
+            console.log("Result: You win");
+            console.log("Computer score:" + computerScore);
+            console.log("Your score:" + humanScore);
+
         }
         else {
-            return "scissors";
+            console.log("Invalid");
         }
+    }
+
+    function winner(yourTotal, computerTotal){
+    if (yourTotal > computerTotal) {
+        console.log("Final result: You win the game!");
+    }
+    else if (yourTotal === computerTotal) {
+console.log( "Final result: It's a draw");
+    }
+    else {
+        console.log("Final result: Computer wins");
+    }
 }
 
-let humanChoice = prompt ("Choose your fighter - Rock, Paper or Scissors");
+    playRound(humanSelection, computerSelection);
 
-function getHumanChoice () {
-        if (humanChoice.toLowerCase() === "rock") {
-            return "rock";
-        }
-         else if (humanChoice.toLowerCase() === "paper") {
-            return "paper";
-        }
-         else if (humanChoice.toLowerCase() === "scissors") {
-            return "scissors";
-        }
-         else {
-            return "please only enter 'rock' 'paper' or 'scissors'";
-        }
+    computerSelection = getComputerChoice();
+    humanSelection = getHumanChoice();
+    playRound(humanSelection, computerSelection);
+
+    computerSelection = getComputerChoice();
+    humanSelection = getHumanChoice();
+    playRound(humanSelection, computerSelection);
+
+    computerSelection = getComputerChoice();
+    humanSelection = getHumanChoice();
+    playRound(humanSelection, computerSelection);
+
+    computerSelection = getComputerChoice();
+    humanSelection = getHumanChoice();
+    playRound(humanSelection, computerSelection);
+
+    winner(humanScore, computerScore);
 }
 
-console.log(getComputerChoice())
 
-console.log(getHumanChoice())
+
+console.log(playGame())
+
