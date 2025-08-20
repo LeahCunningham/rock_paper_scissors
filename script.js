@@ -5,17 +5,45 @@ let computerScore = 0;
 let count = 0;
 
 // Variables to store the user and computer choice for the current round
-let humanSelection;
+let humanSelection = getHumanChoice();
 let computerSelection = getComputerChoice();
 
-//Captures the button selection
-const rockSelected = document.querySelector("#rockBtn");
+//Captures the button selection and saves it to the human selection variable
+function getHumanChoice() {
+    const rockSelected = document.querySelector("#rockBtn");
+    const paperSelected = document.querySelector("#paperBtn");
+    const scissorsSelected = document.querySelector("#scissorsBtn");
 
-rockSelected.addEventListener("click", () => {
-    humanSelection = "rock";
-    playRound(humanSelection, computerSelection);
+    rockSelected.addEventListener("click", () => {
+        humanSelection = "rock";
+        playRound(humanSelection, computerSelection);
+    }
+    )
+
+    paperSelected.addEventListener("click", () => {
+        humanSelection = "paper";
+        playRound(humanSelection, computerSelection);
+    })
+
+    scissorsSelected.addEventListener("click", () => {
+        humanSelection = "scissors";
+        playRound(humanSelection, computerSelection);
+    })
 }
-)
+
+//Assigns 3x randomly generated numbers to the 3x choice options
+function getComputerChoice() {
+    let randomInt = Math.floor(Math.random() * 3); // returns a random number that results in a vaule of 0, 1 or 2
+    if (randomInt < 1) {
+        return "rock";
+    }
+    else if (randomInt < 2 && randomInt >= 1) {
+        return "paper";
+    }
+    else {
+        return "scissors";
+    }
+}
 
 function playRound(humanChoice, computerChoice) {
     count = ++count;
@@ -43,40 +71,6 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-
-//Assigns 3x randomly generated numbers to the 3x choice options
-function getComputerChoice() {
-    let randomInt = Math.floor(Math.random() * 3); // returns a random number that results in a vaule of 0, 1 or 2
-    if (randomInt < 1) {
-        return "rock";
-    }
-    else if (randomInt < 2 && randomInt >= 1) {
-        return "paper";
-    }
-    else {
-        return "scissors";
-    }
-}
-
-
-//Triggers the prompt and returns the text input as one of the three choices (or error message)
-
-/* function getHumanChoice() {
-    humanInput = prompt("Choose your fighter - Rock, Paper or Scissors");
-    if (humanInput.toLowerCase() === "rock") {
-        return "rock";
-    }
-    else if (humanInput.toLowerCase() === "paper") {
-        return "paper";
-    }
-    else if (humanInput.toLowerCase() === "scissors") {
-        return "scissors";
-    }
-    else {
-        return "please only enter 'rock' 'paper' or 'scissors'";
-    }
-}
-*/
 
 
 // run the same function 5 times and pass in the new humanChoice and computerChoice value each time, increment the count and the scores
@@ -131,24 +125,24 @@ function winner(yourTotal, computerTotal) {
 }
 
 /*Repeat rounds 5x and re-run the get choice functions to reassign the selection variables which are passed to the playRound functon each time
- 
+
     playRound(humanSelection, computerSelection);
- 
+
     computerSelection = getComputerChoice();
     humanSelection = getHumanChoice();
     playRound(humanSelection, computerSelection);
- 
+
     computerSelection = getComputerChoice();
     humanSelection = getHumanChoice();
     playRound(humanSelection, computerSelection);
- 
+
     computerSelection = getComputerChoice();
     humanSelection = getHumanChoice();
     playRound(humanSelection, computerSelection);
- 
+
     computerSelection = getComputerChoice();
     humanSelection = getHumanChoice();
- 
+
      */
 
 
