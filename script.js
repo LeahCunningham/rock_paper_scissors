@@ -88,27 +88,21 @@ function playRound(humanChoice, computerChoice) {
 
     roundNumberFigure.textContent = count;
     roundNumber.appendChild(roundNumberFigure);
-    roundNumber.style.display = "flex";
 
     computerTotalFigure.textContent = computerScore;
     computerTotal.appendChild(computerTotalFigure);
-    computerTotal.style.display = "flex";
 
     humanTotalFigure.textContent = humanScore;
     humanTotal.appendChild(humanTotalFigure);
-    humanTotal.style.display = "flex";
 
     youChoseThis.textContent = humanSelection;
     youChose.appendChild(youChoseThis);
-    youChose.style.display = "flex";
 
     computerChoseThis.textContent = computerSelection;
     computerChose.appendChild(computerChoseThis);
-    computerChose.style.display = "flex";
 
     roundResultOutcome.textContent = result;
     roundResult.appendChild(roundResultOutcome);
-    roundResult.style.display = "flex";
 
     computerSelection = getComputerChoice();
 

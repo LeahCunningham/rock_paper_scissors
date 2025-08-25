@@ -14,3 +14,12 @@
 .label{
     padding-right: 5px;
 }
+
+#roundNo, 
+#youChose, 
+#computerChose, 
+#computerTotal, 
+#humanTotal,
+#roundResult {
+    display: flex;
+}
