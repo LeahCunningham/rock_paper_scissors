@@ -5,17 +5,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock paper scissors</title>
+    <link rel="stylesheet" href="styles.css">
 
 </head>
 
 <body>
     <div id="selectionOptions">
+        <h3>Choose your fighter...</h3>
         <button id="rockBtn">Rock</button>
         <button id="paperBtn">Paper</button>
         <button id="scissorsBtn">Scissors</button>
     </div>
+    <div id="resultsContainer">
+        <h3>This round...</h3>
+        <div id="roundNo">
+            <div class="label">Round number: </div>
+        </div>
+        <div id="youChose">
+            <div class="label">Your choice: </div>
+        </div>
+        <div id="computerChose">
+            <div class="label">Computer choice: </div>
+        </div>
+        <div id="roundResult">
+            <div class="label">Round result: </div>
+        </div>
+        <h3>Current scores...</h3>
+        <div id="humanTotal">
+            <div class="label">Your score: </div>
+        </div>
+        <div id="computerTotal">
+            <div class="label">Computer score: </div>
+        </div>
+    </div>
 </body>
-    <script src="script.js">
-    </script>
+<script src="script.js">
+</script>
 
 </html>

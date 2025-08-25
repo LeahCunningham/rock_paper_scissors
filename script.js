@@ -3,6 +3,30 @@ let humanInput;
 let humanScore = 0;
 let computerScore = 0;
 let count = 0;
+let result = 0;
+
+// variables to create and append elements to the HTML
+
+const roundNumber = document.querySelector("#roundNo");
+const roundNumberFigure = document.createElement("div");
+
+const humanTotal = document.querySelector("#humanTotal");
+const humanTotalFigure = document.createElement("div");
+
+const computerTotal = document.querySelector("#computerTotal");
+const computerTotalFigure = document.createElement("div");
+
+const youChose = document.querySelector("#youChose");
+const youChoseThis = document.createElement("div");
+
+const computerChose = document.querySelector("#computerChose");
+const computerChoseThis = document.createElement("div");
+
+const roundResult = document.querySelector("#roundResult");
+const roundResultOutcome = document.createElement("div");
+
+const finalResult = document.querySelector("#resultsContainer");
+const finalResultOutcome = document.createElement("div");
 
 // Variables to store the user and computer choice for the current round
 let humanSelection = getHumanChoice();
@@ -15,18 +39,18 @@ function getHumanChoice() {
     const scissorsSelected = document.querySelector("#scissorsBtn");
 
     rockSelected.addEventListener("click", () => {
-        humanSelection = "rock";
+        humanSelection = "Rock";
         playRound(humanSelection, computerSelection);
     }
     )
 
     paperSelected.addEventListener("click", () => {
-        humanSelection = "paper";
+        humanSelection = "Paper";
         playRound(humanSelection, computerSelection);
     })
 
     scissorsSelected.addEventListener("click", () => {
-        humanSelection = "scissors";
+        humanSelection = "Scissors";
         playRound(humanSelection, computerSelection);
     })
 }
@@ -35,117 +59,81 @@ function getHumanChoice() {
 function getComputerChoice() {
     let randomInt = Math.floor(Math.random() * 3); // returns a random number that results in a vaule of 0, 1 or 2
     if (randomInt < 1) {
-        return "rock";
+        return "Rock";
     }
     else if (randomInt < 2 && randomInt >= 1) {
-        return "paper";
+        return "Paper";
     }
     else {
-        return "scissors";
+        return "Scissors";
     }
 }
 
 function playRound(humanChoice, computerChoice) {
     count = ++count;
-    console.log("Round no.:" + count);
-    console.log("Your choice:" + humanChoice)
-    console.log("Computer's choice:" + computerChoice)
 
     if (humanChoice === computerChoice) {
-        console.log("Result: It's a draw");
-        console.log("Computer score:" + computerScore);
-        console.log("Your score:" + humanScore);
+        result = "It's a draw";
+
     }
-    else if ((humanChoice === "rock" && computerChoice === "paper") || (humanChoice === "paper" && computerChoice === "scissors") || (humanChoice === "scissors" && computerChoice === "rock")) {
+    else if ((humanChoice === "Rock" && computerChoice === "Paper") || (humanChoice === "Paper" && computerChoice === "Scissors") || (humanChoice === "Scissors" && computerChoice === "Rock")) {
         computerScore = ++computerScore;
-        console.log("Result: You lose");
-        console.log("Computer score:" + computerScore);
-        console.log("Your score:" + humanScore);
+        result = "You lose";
 
     }
-    else if ((humanChoice === "paper" && computerChoice === "rock") || (humanChoice === "scissors" && computerChoice === "paper") || (humanChoice === "rock" && computerChoice === "scissors")) {
+    else if ((humanChoice === "Paper" && computerChoice === "Rock") || (humanChoice === "Scissors" && computerChoice === "Paper") || (humanChoice === "Rock" && computerChoice === "Scissors")) {
         humanScore = ++humanScore;
-        console.log("Result: You win");
-        console.log("Computer score:" + computerScore);
-        console.log("Your score:" + humanScore);
+        result = "You win";
+    }
+
+    roundNumberFigure.textContent = count;
+    roundNumber.appendChild(roundNumberFigure);
+    roundNumber.style.display = "flex";
+
+    computerTotalFigure.textContent = computerScore;
+    computerTotal.appendChild(computerTotalFigure);
+    computerTotal.style.display = "flex";
+
+    humanTotalFigure.textContent = humanScore;
+    humanTotal.appendChild(humanTotalFigure);
+    humanTotal.style.display = "flex";
+
+    youChoseThis.textContent = humanSelection;
+    youChose.appendChild(youChoseThis);
+    youChose.style.display = "flex";
+
+    computerChoseThis.textContent = computerSelection;
+    computerChose.appendChild(computerChoseThis);
+    computerChose.style.display = "flex";
+
+    roundResultOutcome.textContent = result;
+    roundResult.appendChild(roundResultOutcome);
+    roundResult.style.display = "flex";
+
+    computerSelection = getComputerChoice();
+
+
+    if (humanScore === 5 || computerScore === 5) {
+
+        const allButtons = document.querySelectorAll("button");
+        allButtons.forEach(btn => {
+            btn.disabled = true;
+        })
+
+
+        if (humanScore > computerScore) {
+            finalResult.appendChild(finalResultOutcome);
+            finalResultOutcome.textContent = "Game over - You win!";
+            finalResultOutcome.className = "resultW";
+        }
+
+        else {
+            finalResult.appendChild(finalResultOutcome);
+            finalResultOutcome.textContent = "Game over - Computer wins";
+            finalResultOutcome.className = "resultL";
+        }
     }
 }
 
 
-
-// run the same function 5 times and pass in the new humanChoice and computerChoice value each time, increment the count and the scores
-
-/*function playGame() {
-  let humanScore = 0;
-   let computerScore = 0;
-   let count = 0;
-
-   function playRound(humanChoice, computerChoice) {
-       count = ++count;
-       console.log("Round no.:" + count);
-       console.log("Your choice:" + humanChoice)
-       console.log("Computer's choice:" + computerChoice)
-
-       if (humanChoice === computerChoice) {
-           console.log("Result: It's a draw");
-           console.log("Computer score:" + computerScore);
-           console.log("Your score:" + humanScore);
-       }
-       else if ((humanChoice === "rock" && computerChoice === "paper") || (humanChoice === "paper" && computerChoice === "scissors") || (humanChoice === "scissors" && computerChoice === "rock")) {
-           computerScore = ++computerScore;
-           console.log("Result: You lose");
-           console.log("Computer score:" + computerScore);
-           console.log("Your score:" + humanScore);
-
-       }
-       else if ((humanChoice === "paper" && computerChoice === "rock") || (humanChoice === "scissors" && computerChoice === "paper") || (humanChoice === "rock" && computerChoice === "scissors")) {
-           humanScore = ++humanScore;
-           console.log("Result: You win");
-           console.log("Computer score:" + computerScore);
-           console.log("Your score:" + humanScore);
-
-       }
-       else {
-           console.log("Invalid");
-       }
-   }
-
-   */
-
-function winner(yourTotal, computerTotal) {
-    if (yourTotal > computerTotal) {
-        console.log("Final result: You win the game!");
-    }
-    else if (yourTotal === computerTotal) {
-        console.log("Final result: It's a draw");
-    }
-    else {
-        console.log("Final result: Computer wins");
-    }
-}
-
-/*Repeat rounds 5x and re-run the get choice functions to reassign the selection variables which are passed to the playRound functon each time
-
-    playRound(humanSelection, computerSelection);
-
-    computerSelection = getComputerChoice();
-    humanSelection = getHumanChoice();
-    playRound(humanSelection, computerSelection);
-
-    computerSelection = getComputerChoice();
-    humanSelection = getHumanChoice();
-    playRound(humanSelection, computerSelection);
-
-    computerSelection = getComputerChoice();
-    humanSelection = getHumanChoice();
-    playRound(humanSelection, computerSelection);
-
-    computerSelection = getComputerChoice();
-    humanSelection = getHumanChoice();
-
-     */
-
-
-
-// winner(humanScore, computerScore);
 
